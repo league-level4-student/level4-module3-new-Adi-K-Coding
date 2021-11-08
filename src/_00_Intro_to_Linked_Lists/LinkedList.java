@@ -1,131 +1,145 @@
 package _00_Intro_to_Linked_Lists;
 
+import java.util.Iterator;
+
 public class LinkedList<T> {
 
-    /*
-     * The head and tail contain references that point to the first and last
-     * elements of the LinkedList respectively.
-     * 
-     * These must be updated if elements are headed to the front or back, but
-     * allow for easy entry points into the LinkedList.
-     */
-    private Node<T> head;
-    private Node<T> tail;
+	/*
+	 * The head and tail contain references that point to the first and last
+	 * elements of the LinkedList respectively.
+	 * 
+	 * These must be updated if elements are headed to the front or back, but allow
+	 * for easy entry points into the LinkedList.
+	 */
+	private Node<T> head;
+	private Node<T> tail;
 
-    public void add(T value) {
+	public static void main(String[] args) {
+		LinkedList<String> names = new LinkedList<String>();
+		names.add("James");
+		names.add("Bob");
+		names.add("Raplh");
+		names.add("Jimmy");
+		names.remove(1);
+		Node<String> first = names.head;
+		
+		names.print();
+	}
 
-        if (head == null) {
-            head = new Node<T>(value);
-        } else {
+	public void add(T value) {
 
-            Node<T> prev = head;
-            Node<T> next = head.getNext();
+		if (head == null) {
+			head = new Node<T>(value);
+		} else {
 
-            while (next != null) {
-                prev = prev.getNext();
-                next = next.getNext();
-            }
+			Node<T> prev = head;
+			Node<T> next = head.getNext();
 
-            next = new Node<T>(value);
-            prev.setNext(next);
-            next.setPrev(prev);
-            tail = next;
-        }
-    }
+			while (next != null) {
+				prev = prev.getNext();
+				next = next.getNext();
+			}
 
-    public void remove(int position) {
+			next = new Node<T>(value);
+			prev.setNext(next);
+			next.setPrev(prev);
+			tail = next;
+		}
+	}
 
-        if (head == null) {
-            System.out.println("No items to remove!");
-        } else if (position == 0) {
+	public void remove(int position) {
 
-            head = head.getNext();
+		if (head == null) {
+			System.out.println("No items to remove!");
+		} else if (position == 0) {
 
-            if (head != null) {
-                head.setPrev(null);
-            }
+			head = head.getNext();
 
-        } else {
+			if (head != null) {
+				head.setPrev(null);
+			}
 
-            int positionCounter = 1;
-            Node<T> prev = head;
-            Node<T> next = head.getNext();
+		} else {
 
-            while (positionCounter < position) {
+			int positionCounter = 1;
+			Node<T> prev = head;
+			Node<T> next = head.getNext();
 
-                prev = prev.getNext();
-                next = next.getNext();
-                positionCounter++;
+			while (positionCounter < position) {
 
-            }
+				prev = prev.getNext();
+				next = next.getNext();
+				positionCounter++;
 
-            if (positionCounter == position && next != null) {
+			}
 
-                next = next.getNext();
-                prev.setNext(next);
+			if (positionCounter == position && next != null) {
 
-                if (next != null) {
-                    next.setPrev(prev);
-                }
-            } else {
-                System.out.println("Position not found!");
-            }
-        }
+				next = next.getNext();
+				prev.setNext(next);
 
-    }
+				if (next != null) {
+					next.setPrev(prev);
+				}
+			} else {
+				System.out.println("Position not found!");
+			}
+		}
 
-    public void print() {
-        if (head == null) {
-            System.out.println("No items in list!");
-        } else {
+	}
 
-            Node<T> next = head;
+	public void print() {
+		if (head == null) {
+			System.out.println("No items in list!");
+		} else {
 
-            while (next != null) {
+			Node<T> next = head;
 
-                System.out.print(next.getValue().toString() + " <-> ");
-                next = next.getNext();
+			while (next != null) {
 
-            }
+				System.out.print(next.getValue().toString() + " <-> ");
+				next = next.getNext();
 
-            System.out.println();
+			}
 
-        }
+			System.out.println();
 
-    }
+		}
 
-    public int size() {
-        int size = 0;
-        if (head != null) {
+	}
 
-            Node<T> next = head;
+	public int size() {
+		int size = 0;
+		if (head != null) {
 
-            while (next != null) {
+			Node<T> next = head;
 
-                next = next.getNext();
-                size++;
+			while (next != null) {
 
-            }
+				next = next.getNext();
+				size++;
 
-        }
-        return size;
+			}
 
-    }
+		}
+		return size;
 
-    public Node<T> getHead() {
-        return head;
-    }
+	}
 
-    public Node<T> getTail() {
-        return tail;
-    }
+	public Node<T> getHead() {
+		return head;
+	}
 
-    public void setHead(Node<T> head) {
-        this.head = head;
-    }
+	public Node<T> getTail() {
+		return tail;
+	}
 
-    public void setTail(Node<T> tail) {
-        this.tail = tail;
-    }
+	public void setHead(Node<T> head) {
+		this.head = head;
+	}
+
+	public void setTail(Node<T> tail) {
+		this.tail = tail;
+	}
 
 }
