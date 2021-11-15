@@ -21,7 +21,12 @@ public class LinkedList<T> {
 		names.add("Raplh");
 		names.add("Jimmy");
 		names.remove(1);
-		Node<String> first = names.head;
+		Node<String> current = names.head;
+		
+		while (current!=null) {
+			current.setValue(current.getValue().toUpperCase());
+			current=current.getNext();
+		}
 		
 		names.print();
 	}
