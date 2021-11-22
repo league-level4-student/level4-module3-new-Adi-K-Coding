@@ -22,18 +22,37 @@ public class SpiesOnATrain {
 	 * statements.
 	 */
 
-
 	String findIntel(LinkedList<TrainCar> train, String[] clues) {
+		HashMap<String, Integer> names = new HashMap<String, Integer>();
 		for (int i = 0; i < clues.length; i++) {
 			System.out.println(clues[i]);
 		}
 		Node<TrainCar> current = train.getHead();
-
+		String spyName = "bob";
 		while (current != null) {
 			System.out.println(current.getValue().questionPassenger());
+			for (int i = 0; i < clues.length; i++) {
+				if (current.getValue().questionPassenger().contains(clues[i])) {
+					int indexClue = current.getValue().questionPassenger().indexOf(clues[i]) - 1;
+					String leadingIntoClue = current.getValue().questionPassenger().substring(0, indexClue);
+					int nameIndex = leadingIntoClue.lastIndexOf(" ") + 1;
+					spyName = leadingIntoClue.substring(nameIndex, indexClue);
+					if (names.containsKey(spyName)) {
+						names.put(spyName, names.get(spyName) + 1);
+					} else {
+						names.put(spyName, 1);
+					}
+				}
+			}
 			current = current.getNext();
 		}
-		return "";
+		for (String name : names.keySet()) {
+			if (names.get(name) == 3) {
+				spyName = name;
+			}
+		}
+		System.out.println(spyName);
+		return spyName;
 
 	}
 
