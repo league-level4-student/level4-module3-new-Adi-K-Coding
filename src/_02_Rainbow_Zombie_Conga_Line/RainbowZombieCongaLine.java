@@ -47,7 +47,7 @@ public class RainbowZombieCongaLine {
 		int positionCounter = 0;
 		Node<Zombie> current = congaLine.getHead();
 		while (current != null) {
-			if(positionCounter==position) {
+			if (positionCounter == position) {
 				congaLine.add(dancer);
 			}
 			current = current.getNext();
@@ -68,7 +68,7 @@ public class RainbowZombieCongaLine {
 				congaLine.remove(positionCounter);
 			}
 			current = current.getNext();
-			
+			positionCounter += 1;
 		}
 	}
 
@@ -77,7 +77,17 @@ public class RainbowZombieCongaLine {
 	 * the conga line!
 	 */
 	public void youAreDone(Zombie dancer) {
-
+		int positionCounter = 0;
+		ZombieHatColor dancerHatColor = dancer.getZombieHatColor();
+		Node<Zombie> current = congaLine.getHead();
+		while (current != null) {
+			if (current.getValue().getZombieHatColor().equals(dancerHatColor)) {
+				congaLine.remove(positionCounter);
+				break;
+			}
+			current = current.getNext();
+			positionCounter += 1;
+		}
 	}
 
 	/*
@@ -85,6 +95,16 @@ public class RainbowZombieCongaLine {
 	 * one to the front, one to the end and one in the middle.
 	 */
 	public void brains(Zombie dancer) {
+		Zombie dancer1 = new Zombie(dancer.getZombieHatColor());
+		congaLine.add(dancer1);
+		Zombie dancer2 = new Zombie(dancer.getZombieHatColor());
+		congaLine.add(dancer2);
+		Node<Zombie> head = new Node<Zombie>(dancer1);
+		Node<Zombie> current = head;
+		congaLine.setHead(current);
+		while (current != null) {
+			current = current.getNext();
+		}
 
 	}
 
