@@ -1,5 +1,8 @@
 package _02_Rainbow_Zombie_Conga_Line;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import _00_Intro_to_Linked_Lists.LinkedList;
 import _00_Intro_to_Linked_Lists.Node;
 import _01_Spies_On_A_Train.TrainCar;
@@ -95,17 +98,31 @@ public class RainbowZombieCongaLine {
 	 * one to the front, one to the end and one in the middle.
 	 */
 	public void brains(Zombie dancer) {
+		int counter = 0;
 		Zombie dancer1 = new Zombie(dancer.getZombieHatColor());
-		congaLine.add(dancer1);
 		Zombie dancer2 = new Zombie(dancer.getZombieHatColor());
 		congaLine.add(dancer2);
 		Node<Zombie> head = new Node<Zombie>(dancer1);
+		Node<Zombie> soonToBeOldHead = congaLine.getHead();
+		soonToBeOldHead.setPrev(head);
+		head.setNext(soonToBeOldHead);
+		congaLine.setHead(head);
 		Node<Zombie> current = head;
-		congaLine.setHead(current);
 		while (current != null) {
+			counter += 1;
 			current = current.getNext();
 		}
-
+		int middle = counter / 2;
+		current = head;
+		for (int i = 0; i < middle; i++) {
+			current = current.getNext();
+		}
+		Node<Zombie> middleZombie = new Node<Zombie>(dancer);
+		Node<Zombie> current1 = current.getPrev();
+		current.setPrev(middleZombie);
+		middleZombie.setNext(current);
+		middleZombie.setPrev(current1);
+		current1.setNext(middleZombie);
 	}
 
 	/*
@@ -113,7 +130,21 @@ public class RainbowZombieCongaLine {
 	 * color to the end of the line.
 	 */
 	public void rainbowBrains(Zombie dancer) {
+		Node<Zombie> head = new Node<Zombie>(dancer);
+		Node<Zombie> current = head;
+		congaLine.setHead(current);
+		ArrayList<Zombie> zombiesList = new ArrayList<Zombie>();
+		zombiesList.add(new Zombie(ZombieHatColor.R));
+		zombiesList.add(new Zombie(ZombieHatColor.O));
+		zombiesList.add(new Zombie(ZombieHatColor.Y));
+		zombiesList.add(new Zombie(ZombieHatColor.G));
+		zombiesList.add(new Zombie(ZombieHatColor.B));
+		zombiesList.add(new Zombie(ZombieHatColor.I));
+		zombiesList.add(new Zombie(ZombieHatColor.V));
+		for (int i = 0; i < 7; i++) {
+			congaLine.add(zombiesList.get(i));
 
+		}
 	}
 
 	public LinkedList<Zombie> getCongaLine() {
