@@ -43,13 +43,24 @@ public class BinaryTreeDemo {
 		tree.insert(10);
 		tree.insert(4);
 		tree.insert(1);
-		tree.insert(1);
 		tree.insert(2);
 		tree.printVertical();
-		tree.search(4);
-		tree.delete(4);
-		tree.search(4);
-		tree.printVertical();
+//		tree.search(4);
+//		tree.delete(4);
+//		tree.search(4);
+//		tree.printVertical();
 		Node<Integer> root = tree.getRoot();
+		printNodeValue(root);
+
+	}
+
+	void printNodeValue(Node<Integer> passedInNode) {
+		System.out.println(passedInNode.getValue());
+		if (passedInNode.getLeft() != null) {
+			printNodeValue(passedInNode.getLeft());
+		}
+		if (passedInNode.getRight() != null) {
+			printNodeValue(passedInNode.getRight());
+		}
 	}
 }
