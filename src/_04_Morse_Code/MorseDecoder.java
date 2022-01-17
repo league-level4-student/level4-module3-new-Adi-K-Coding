@@ -102,7 +102,7 @@ public class MorseDecoder {
 
 			return recursiveSearch(current.getLeft(), morse);
 		} else {
-
+			
 			return recursiveSearch(current.getRight(), morse);
 		}
 
