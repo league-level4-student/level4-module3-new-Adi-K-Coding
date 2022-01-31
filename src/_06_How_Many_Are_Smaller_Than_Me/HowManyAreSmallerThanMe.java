@@ -22,6 +22,9 @@ public class HowManyAreSmallerThanMe {
 
 	int search(AVLNode<Integer> treeNode, int me) {
 		int counter = 0;
+		if(treeNode==null) {
+			return 0;
+		}
 		if (treeNode.getValue() < me) {
 			counter += 1;
 		}
